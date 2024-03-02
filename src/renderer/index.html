@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Electron</title>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+    />
+
+    <link href="./assets/main.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body class="m-0 p-0">
+
+
+    <main id="app" class="container-fluid p-2">
+      
+      <header class="animate__animated  animate__bounceInDown">
+        <div class="logo">
+          <h1>W3RBanlist</h1>
+        </div>
+        <menu class="menu p-2">
+          <li class="disabled">
+            Login
+          </li>
+          <li>
+            <a href="https://github.com/zapobyte/wc3rbanlist" target="_blank">About</a> 
+          </li>
+        </menu>
+      </header>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-3">
+
+          <section class="frame-container animate__animated p-2 animate__bounceInDown ">
+            <h2 class="text-gold">Ban</h2>
+            <form class="">
+              <div class="input-container my-2">
+                <label for="input-banlist">Name</label>
+                <input class="input-banlist" type="text" id="name" name="input-banlist" placeholder=""/>
+              </div>
+              <div class="input-container my-2">
+                <label for="input-banlist">Reason</label>
+                <textarea rows="4" class="input-banlist" type="text" id="reason" name="input-banlist" placeholder=""></textarea>
+              </div>
+              <div class="text-end">
+                <button class="btn btn-lg primary btn-dark  " type="submit" id="ban">
+                  Add
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="frame-container animate__animated  animate__bounceInDown mt-3 p-2">
+            <h2 class="text-gold">Management</h2>
+            <div class="py-2">
+              <button class="btn btn-lg  primary  btn-dark" type="submit" id="deleteDb">
+                Delete Database
+              </button>
+            </div>
+          
+          </section>
+        </div>
+
+        <div class="col-12 col-md-9">
+          <div class="banlist animate__animated  animate__bounceInDown">
+            <h2 class="text-gold p-2">Banlist</h2>
+            <div class="input-container w-100  p-2">
+              <label for="input-banlist">Search</label>
+              <input class="input-banlist min-w-100" type="text" id="search" name="input-banlist" placeholder=""/>
+            </div>
+            <div class="table-responsive mt-2">
+            <table class="table table-dark" id="banlist">
+              <thead>
+                  <tr class="table-header">
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Reason</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody class="table-body" id="banlist-body">
+              </tbody>
+          </table>
+        </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer class="text-center">
+      <span id="appVersion"></span>
+    </footer>
+    <script type="module" src="./src/renderer.ts"></script>
+  </body>
+</html>

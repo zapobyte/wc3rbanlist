@@ -1,0 +1,272 @@
+@import './base.css';
+@import 'material-icons/iconfont/material-icons.css';
+
+#app {
+  overflow-x: hidden;
+  min-height: 100vh !important;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+header {
+  display: inline-flex;
+  width: calc(100% - 1rem);
+}
+
+.menu {
+  text-align: center;
+  min-width: 180px;
+  position: relative;
+  margin-left: auto;
+  display: grid;
+  gap: 1rem;
+  background-color: rgba(8, 8, 8, 0.8);
+  border: 8px solid;
+  height: 54px;
+  grid-template-columns: 1fr 1fr;
+  border-image: url('../../../resources/orcborder.png') 15 round;
+}
+
+.menu li {
+  color: goldenrod;
+  cursor: pointer;
+  text-shadow: 2px 2px 0px black;
+  font-size: 1.3rem;
+}
+
+.menu li:hover {
+  color: gold;
+  text-shadow: 1px 1px 0px black;
+}
+
+
+.menu:before {
+  position: absolute;
+  top: -85px;
+  left: -100px;
+  width: 100px;
+  height: 100px;
+  content: "  ";
+  background-size: cover;
+  background-image: url('../../../resources/p-chain.png');
+}
+
+.menu:after {
+  position: absolute;
+  top: -85px;
+  right: -100px;
+  width: 100px;
+  height: 100px;
+  content: "  ";
+  background-size: cover;
+  background-image: url('../../../resources/p-chain.png');
+  transform: scaleX(-1);
+}
+
+.frame-container {
+  background-color: rgba(8, 8, 8, 0.8);
+  border: 8px solid;
+  border-image: url('../../../resources/orcborder.png') 15 round;
+}
+
+.frame-container .btn.prim  ary {
+  margin-left: auto;
+}
+
+.flex-end {
+  display: flex;
+  justify-self: end;
+}
+
+.logo {
+  background-color: rgba(8, 8, 8, 0.8);
+  position: relative;
+  width: max-content;
+  border: 8px solid;
+  border-image: url('../../../resources/orcborder.png') 15 round;
+  margin-bottom: 2rem;
+}
+
+
+.logo>h1 {
+  margin: 0 !important;
+  border-radius: 5px;
+  line-height: 1em;
+  padding: 4px 4px 0px 4px;
+}
+
+.logo:before {
+  position: absolute;
+  top: -65px;
+  left: -100px;
+  width: 100px;
+  height: 100px;
+  content: "  ";
+  background-size: cover;
+  background-image: url('../../../resources/p-chain.png');
+}
+
+.logo:after {
+  position: absolute;
+  top: -60px;
+  right: -100px;
+  width: 100px;
+  height: 100px;
+  content: "  ";
+  background-size: cover;
+  background-image: url('../../../resources/p-chain.png');
+  transform: scaleX(-1);
+}
+
+
+.banlist {
+  position: relative;
+  border: 8px solid transparent;
+  border-image: url('../../../resources/orcborder.png') 10 round;
+  user-select: none;
+  max-height: calc(100vh - 110px);
+  background: rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+.tooltip-banlist-entry {
+  position: absolute;
+  top: 0px;
+  left:0;
+  right: 0;
+  max-width: max-content;
+  height: max-content;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 999;
+  background:  rgba(0, 0, 0, 0.8);
+  box-shadow: 1px 1px 1px #272727;
+}
+
+.input-container {
+  color: white !important;
+}
+
+.input-container label {
+  min-width: 150px;
+}
+
+.input-container input,
+.input-container textarea {
+  margin-left: auto;
+  color: white !important;
+  width: 100%;
+}
+
+
+.input-banlist {
+  border: 2px solid rgb(143, 108, 19);
+  background-color: #161616;
+  border-radius: 5px;
+  margin: 0;
+  margin-left: 1rem;
+}
+
+
+.btn {
+  width: max-content;
+  text-align: center;
+  line-height: 1.4;
+  padding: 0 1.5rem;
+  padding-top: 0.25em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.primary {
+  background-image: url('../../../resources/Button_Blue.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.delete {
+  background-image: url('../../../resources/exit-button.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 31px;
+  height: 30px;
+  padding: 1px;
+}
+
+.delete:hover {
+  background-image: url('../../../resources/exit-button-hover.png');
+}
+
+.primary:hover {
+  background-image: url('../../../resources/Button_Blue_Hover.png');
+}
+
+.primary:active {
+  background-image: url('../../../resources/Button_Blue_Active.png');
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  color: #ccc !important;
+}
+
+
+a {
+  color: goldenrod;
+  text-decoration: none;
+}
+
+a:hover {
+  color: gold;
+}
+
+
+/* Text color classes */
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-black {
+  color: #000000 !important;
+}
+
+.text-gold {
+  color: gold !important;
+}
+
+.text-goldenrod {
+  color: goldenrod !important;
+}
+
+.text-orange {
+  color: rgb(199, 90, 1);
+}
+
+
+/* Table styles */
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border: 1px solid #3a3a3a;
+  overflow: auto;
+}
+
+.item-table th, .item-table td {
+  padding: 10px;
+  border: 1px solid #3a3a3a;
+}
+.item-table tr:not(.table-header):hover {
+  background-color: rgba(53, 53, 53, 0.5);
+}
+.item-table th:last-child, .item-table td:last-child {
+  width: max-content;
+
+}
