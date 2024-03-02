@@ -1,8 +1,9 @@
-# W3RBanlist - Warcraft 3 Reforge Banlist
+# W3RBanlist - Warcraft 3 Reforge Banlist 
 
 Welcome to the **W3RBanlist** project repository!
 
-![Warcraft 3 Reforge Banlist](https://your-image-url-here)
+![Warcraft 3 Reforge Banlist]![image](https://github.com/zapobyte/wc3rbanlist/assets/12383059/6d9e30c3-ccd2-49cd-a2fb-1352504c15f3)
+
 
 ## Overview
 
@@ -36,7 +37,7 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - [x] **Copy to clipboard**: Copy banlsit entry message to clipboard
 
 ### Features Not Done (Planned)
-- [ ]**View individual banlist**: See banlist details in it's own view.  
+- [ ] **View individual banlist**: See banlist details in it's own view.  
 - [ ] **Rate Users Banlist**: Users can rate and review banlists submitted by other users.
 - [ ] **Authentication of Users**: Implement user authentication to protect banlist data.
 - [ ] **Sync Banlist to Cloud**: Enable synchronization of banlists to the cloud for easy access.
