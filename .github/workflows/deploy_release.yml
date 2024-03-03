@@ -16,7 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-          
+
+      - name: Install Wine
+        run: sudo apt update && sudo apt install -y wine
+      
       - name: Install Dependencies
         run: npm ci
 
