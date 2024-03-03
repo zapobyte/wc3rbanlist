@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable */
+//@ts-ignore
+import TIME_IMG from '../../renderer/assets/tp.png'
 
 export function clearTable(): void {
   const banlistTable = document.getElementById('banlist')
@@ -38,7 +41,7 @@ export async function createDbEntry(entry, DB): Promise<void> {
         const img = document.createElement('img')
         img.width = 32
         img.height = 32
-        img.src = '../../renderer/assets/tp.png'
+        img.src = TIME_IMG
         const div = document.createElement('div')
         const span = document.createElement('span')
         div.classList.add('d-flex', 'calibri')
