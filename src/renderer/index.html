@@ -46,15 +46,13 @@
 
     <div class="row g-3 p-2">
       <div class="col-12">
-
         <section class="frame-container animate__animated  animate__bounceInDown mt-3 p-2">
           <h2 class="text-gold">Management</h2>
           <div class="py-2">
             <button class="btn btn-lg  primary  btn-dark" type="submit" id="deleteDb">
-              Delete Database
+              Clear Banlist
             </button>
           </div>
-
         </section>
       </div>
       <div class="col-12 col-md-3">
@@ -87,6 +85,7 @@
             <label for="input-banlist">Search</label>
             <input class="input-banlist min-w-100" type="text" id="search" name="input-banlist" placeholder="" />
           </div>
+
           <div class="" id="banlist">
 
           </div>
@@ -96,6 +95,9 @@
     </div>
 
   </main>
+
+  <div class="tooltip-banlist-entry" id="tooltip" style="display:none"></div>
+  
   <script type="module" src="./src/renderer.ts"></script>
 </body>
 

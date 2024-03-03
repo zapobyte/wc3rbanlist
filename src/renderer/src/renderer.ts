@@ -1,166 +1,95 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'animate.css'
-import DataBase from '../src/db'
 import 'bootstrap'
+import DataBase from '../src/db'
+import { clearTable, createDbEntry } from './functions'
 
-let DB: DataBase | null = null
-let DB_ENTRIES: object[] = []
-
-function clearTable(): void {
-  const banlistTable = document.getElementById('banlist')
-  if (banlistTable) {
-    banlistTable.innerHTML = ''
-  }
-}
-
-async function createDbEntry(entry): Promise<void> {
-  const banlistTable = document.getElementById('banlist')
-
-  if (banlistTable) {
-    const card = document.createElement('div')
-    card.classList.add('card', 'text-bg-dark', 'my-1', 'bg-dark-soft')
-    const cardBody = document.createElement('div')
-    const deleteBtn = document.createElement('button')
-    cardBody.classList.add('card-body')
-    deleteBtn.classList.add('btn', 'delete')
-    deleteBtn.addEventListener('click', async (e: Event | any) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const id = Number(e?.target.id)
-      await DB?.remove(id)
-      try {
-        const dbEntries = (await DB?.getAllEntries()) as []
-        DB_ENTRIES = [...dbEntries]
-        clearTable()
-        DB_ENTRIES.forEach((entry) => {
-          createDbEntry(entry)
-        })
-      } catch (error) {
-        console.error(error)
-      }
-    })
-
-    Object.entries(entry).forEach(([key, value]) => {
-      if (key === 'name') {
-        const div = document.createElement('div')
-        div.classList.add('d-flex', 'justify-content-between', 'calibri')
-        div.innerHTML = value as string
-        div.id = key + 'Td'
-        div.appendChild(deleteBtn)
-
-        cardBody.appendChild(div)
-      } else {
-        if (key !== 'id') {
-          const div = document.createElement('div')
-          div.classList.add('calibri')
-          div.innerHTML = value as string
-          div.id = key + 'Td'
-          if (key === 'description') {
-            div.classList.add('text-goldenrod')
-          }
-          if (key === 'date') {
-            div.classList.add('badge', 'text-bg-secondary', 'bade-sm')
-          }
-          deleteBtn.id = entry.id
-          cardBody.appendChild(div)
-        }
-      }
-    })
-    card.addEventListener('click', async (e: any) => {
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      // e.stopPropagation()
-      const tooltip = document.createElement('div')
-      const text = `BAN:[${entry.date}]::${entry.name} - REASON - ${entry.description}`
-      tooltip.id = e.target.id + '_tooltip'
-      if (e.target && e.target.parentElement && e.target.id !== '') {
-        document.body.appendChild(tooltip)
-        const copyText = `Message copy`
-        tooltip.innerText = copyText
-        tooltip.style.display = 'none'
-        tooltip.classList.add('tooltip-banlist-entry')
-        e.target.parentElement.title = copyText
-        if (tooltip) {
-          const position = e.target.getBoundingClientRect()
-          tooltip.style.left = `${position.left}px`
-          tooltip.style.top = `${position.top - 10}px`
-          tooltip.style.display = 'block'
-          tooltip.style.fontSize = '0.9rem'
-          const timeout = setTimeout(() => {
-            tooltip.style.display = 'none'
-            document.body.removeChild(tooltip)
-            clearTimeout(timeout)
-          }, 1000)
-        }
-        try {
-          await navigator.clipboard.writeText(text)
-        } catch (error) {
-          console.error('Failed to copy text to clipboard:', error)
-        }
-      }
-    })
-    card.appendChild(cardBody)
-    banlistTable.appendChild(card)
-  }
-}
+let db: DataBase = new DataBase('banlist', 1)
 
 function init(): void {
-  window.addEventListener('DOMContentLoaded', () => {
-    const versions = window.electron.process.versions
-    console.log('.electron-version', `Electron v${versions.electron}`)
-    console.log('.chrome-version', `Chromium v${versions.chrome}`)
-    console.log('.node-version', `Node v${versions.node}`)
-    initDb()
+  const versions = window.electron.process.versions
+  console.log('.electron-version', `Electron v${versions.electron}`)
+  console.log('.chrome-version', `Chromium v${versions.chrome}`)
+  console.log('.node-version', `Node v${versions.node}`)
 
+  window.addEventListener('DOMContentLoaded', async () => {
+    const dbEntries = (await db?.getAllEntries()) as []
+    dbEntries?.forEach((entry) => {
+      createDbEntry(entry, db)
+    })
     const ban = document.getElementById('ban')
     ban?.addEventListener('click', async (event: Event) => {
       event.preventDefault()
-      const dbEntries = (await DB?.getAllEntries()) as []
-      DB_ENTRIES = [...dbEntries]
       const name = document.getElementById('name') as HTMLTextAreaElement
       const reason = document.getElementById('reason') as HTMLTextAreaElement
+      if (name.value === '') {
+        return
+      }
+      const dbEntries = (await db?.getAllEntries()) as []
       const date = new Date().toJSON().split('T')[0]
-      if (DB) {
+      if (db) {
         const entry = {
           id: dbEntries!.length,
           name: name?.value,
           date: date,
           description: reason?.value
         }
-        await DB.add(entry)
-        DB_ENTRIES.push({ entry })
-        createDbEntry(entry)
+        await db.add(entry)
+        createDbEntry(entry, db)
       }
     })
 
-    const deleteDatabase = document.getElementById('deleteDb')
+    const deleteDatabase = document.getElementById('deletedb')
     deleteDatabase?.addEventListener('click', async () => {
       const alert = window.confirm('Are you sure you want to delete your banlist database?')
       if (alert) {
-        DB?.deleteDatabase()
-        DB = new DataBase('banlist', 1)
+        db?.deleteDatabase()
+        db = new DataBase('banlist', 1)
         window.location.reload()
       }
-      // window.electron.ipcRenderer.send('deleteDb')
+      // window.electron.ipcRenderer.send('deletedb')
     })
+
+    const search = document.getElementById('search')
+    if (search) {
+      search.addEventListener('keydown', async (e: Event | any) => {
+        const value = e.target?.value
+        const dbEntries = (await db?.getAllEntries()) as []
+        const filterEntries = [] as any[]
+        const formatedSearch = value.includes('Backspace')
+          ? e.target?.value.split('Backspace')[0]
+          : e.target?.value
+        dbEntries.forEach((x: any) => {
+          if (
+            (formatedSearch !== '' &&
+              x.name.toLowerCase().includes(formatedSearch.toLowerCase())) ||
+            x.description.toLowerCase().includes(formatedSearch.toLowerCase())
+          ) {
+            filterEntries.push(x)
+          }
+        })
+
+        if (filterEntries.length > 0) {
+          clearTable()
+          filterEntries.forEach((entry) => {
+            createDbEntry(entry, db)
+          })
+          return
+        }
+        if (filterEntries.length === 0 && formatedSearch !== '' && e.key !== 'Backspace') {
+          clearTable()
+          return
+        }
+        if (filterEntries.length === 0 && formatedSearch === '') {
+          clearTable()
+          dbEntries.forEach((entry) => {
+            createDbEntry(entry, db)
+          })
+          return
+        }
+      })
+    }
   })
-}
-
-async function initDb(): Promise<void> {
-  // window.electron.ipcRenderer.send('Banlist initiated')
-  if (DB === null) {
-    DB = new DataBase('banlist', 1)
-  }
-
-  try {
-    const dbEntries = (await DB?.getAllEntries()) as []
-    DB_ENTRIES = [...dbEntries]
-    DB_ENTRIES.forEach((entry) => {
-      createDbEntry(entry)
-    })
-  } catch (error) {
-    console.error(error)
-  }
 }
 
 init()

@@ -78,6 +78,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* For WebKit browsers */
+::-webkit-scrollbar {
+  width: 2px; /* Width of the scrollbar */
+}
+
+/* Track (the area on which the thumb moves) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+/* Thumb (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: goldenrod; /* Color of the thumb */
+}
+
+/* Handle (the draggable part of the scrollbar on hover) */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the thumb on hover */
+}
+
 input, textarea {
   font-family: 'Calibri', sans-serif;
 }

@@ -16,6 +16,7 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - **Delete Entry**: Remove entries from your banlist database with a click.
 - **Copy to clipboard**: Copy banlsit entry message to clipboard
 - **Search**: Effortlessly search your banlist database for specific entries.
+- **Ingame Detection of banlist**: Find a way to detect while in lobby the players name and query your banlist
 - **View individual banlist**: See banlist details in it's own view.  
 - **Authentication**: Secure user authentication to protect banlist data.
 - **Cloud Sync**: Synchronize banlists to the cloud for easy access from anywhere.
@@ -23,7 +24,7 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - **Rating System**: Rate and review banlists submitted by other users.
 - **Import Banlists**: Import banlists from other players into your database.
 - **Replay Upload**: Provide proof of ban with replay upload functionality.
-- **Replay Analyzer**: Automatically detect bans and reasons, analyze game stats, and more.
+- **Replay Analyzer**: Automatically detect and analyze game stats, and more.
 - **Appeal System**: Allow users to appeal bans for review.
 - **Global Banlist**: Create a single, comprehensive banlist database.
 ## Roadmap
@@ -37,6 +38,7 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - [x] **Copy to clipboard**: Copy banlsit entry message to clipboard
 
 ### Features Not Done (Planned)
+- [ ] **Ingame Detection of banlist**: Find a way to detect while in lobby the players name and query your banlist
 - [ ] **View individual banlist**: See banlist details in it's own view.  
 - [ ] **Rate Users Banlist**: Users can rate and review banlists submitted by other users.
 - [ ] **Authentication of Users**: Implement user authentication to protect banlist data.
