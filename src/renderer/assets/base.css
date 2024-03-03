@@ -66,7 +66,8 @@ body {
   font-size: 18px;
   height: 100%;
   color: var(--color-text);
-  background-image: url('../../../resources/wallpaper.jpg');
+  background-color: var(--color-background-soft);
+  /* background-image: url('../../../resources/wallpaper.jpg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -77,6 +78,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input, textarea {
+  font-family: 'Calibri', sans-serif;
+}
 
 button {
   appearance: none; /* Removes default button styles (may not work in all browsers) */

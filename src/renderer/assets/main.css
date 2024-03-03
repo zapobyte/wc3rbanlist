@@ -16,16 +16,14 @@ header {
 
 .menu {
   text-align: center;
-  min-width: 180px;
+  width: 100%;
   position: relative;
   margin-left: auto;
-  display: grid;
   gap: 1rem;
   background-color: rgba(8, 8, 8, 0.8);
-  border: 8px solid;
-  height: 54px;
+  border: 4px solid;
   grid-template-columns: 1fr 1fr;
-  border-image: url('../../../resources/orcborder.png') 15 round;
+  border-image: url('../../../resources/orcborder.png') 10 round;
 }
 
 .menu li {
@@ -41,33 +39,10 @@ header {
 }
 
 
-.menu:before {
-  position: absolute;
-  top: -85px;
-  left: -100px;
-  width: 100px;
-  height: 100px;
-  content: "  ";
-  background-size: cover;
-  background-image: url('../../../resources/p-chain.png');
-}
-
-.menu:after {
-  position: absolute;
-  top: -85px;
-  right: -100px;
-  width: 100px;
-  height: 100px;
-  content: "  ";
-  background-size: cover;
-  background-image: url('../../../resources/p-chain.png');
-  transform: scaleX(-1);
-}
-
 .frame-container {
   background-color: rgba(8, 8, 8, 0.8);
-  border: 8px solid;
-  border-image: url('../../../resources/orcborder.png') 15 round;
+  border: 4px solid;
+  border-image: url('../../../resources/orcborder.png') 10 round;
 }
 
 .frame-container .btn.prim  ary {
@@ -83,11 +58,10 @@ header {
   background-color: rgba(8, 8, 8, 0.8);
   position: relative;
   width: max-content;
-  border: 8px solid;
-  border-image: url('../../../resources/orcborder.png') 15 round;
+  border: 4px solid;
+  border-image: url('../../../resources/orcborder.png') 10 round;
   margin-bottom: 2rem;
 }
-
 
 .logo>h1 {
   margin: 0 !important;
@@ -98,18 +72,20 @@ header {
 
 .logo:before {
   position: absolute;
-  top: -65px;
-  left: -100px;
+  top: -90px;
+  z-index: -1;
+  left: -70px;
   width: 100px;
   height: 100px;
   content: "  ";
   background-size: cover;
   background-image: url('../../../resources/p-chain.png');
+  transform: rotate(35deg);
 }
 
 .logo:after {
   position: absolute;
-  top: -60px;
+  top: -80px;
   right: -100px;
   width: 100px;
   height: 100px;
@@ -119,17 +95,36 @@ header {
   transform: scaleX(-1);
 }
 
+.navbar-toggler {
+  border-image: url('../../../resources/orcborder.png') 10 round !important;
+  background-color: rgba(8, 8, 8, 0.8);
+  border-radius: 5px !important;
+}
+
 
 .banlist {
   position: relative;
-  border: 8px solid transparent;
+  border: 3px solid transparent;
   border-image: url('../../../resources/orcborder.png') 10 round;
   user-select: none;
   max-height: calc(100vh - 110px);
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(8, 8, 8, 0.8);
   overflow-y: auto;
   line-height: 1.4;
   font-size: 1.1rem;
+}
+
+
+.banlist:before {
+  position: absolute;
+  top: -22px;
+  z-index: -1;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  content: "  ";
+  background-size: cover;
+  background-image: url('../../../resources/p-chain.png');
 }
 
 .tooltip-banlist-entry {
@@ -242,13 +237,16 @@ a:hover {
 }
 
 .text-goldenrod {
-  color: goldenrod !important;
+  color: #d9a520 !important;
 }
 
 .text-orange {
   color: rgb(199, 90, 1);
 }
 
+.bg-dark-soft {
+  background-color: var(--color-background-soft) !important;
+}
 
 /* Table styles */
 .item-table {
@@ -263,10 +261,15 @@ a:hover {
   padding: 10px;
   border: 1px solid #3a3a3a;
 }
+
 .item-table tr:not(.table-header):hover {
   background-color: rgba(53, 53, 53, 0.5);
 }
+
 .item-table th:last-child, .item-table td:last-child {
   width: max-content;
+}
 
+.calibri {
+  font-family: 'Calibri', sans-serif;
 }

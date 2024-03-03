@@ -11,8 +11,8 @@ import icon from '../../resources/items-icon.png?asset'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 960,
-    height: 640,
+    width: 480,
+    height: 560,
     center: true,
     autoHideMenuBar: import.meta.env.MODE === 'development' ? false : true,
     icon: icon,

@@ -1,28 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'animate.css'
 import DataBase from '../src/db'
-import 'animate.css'
 import 'bootstrap'
 
 let DB: DataBase | null = null
 let DB_ENTRIES: object[] = []
 
 function clearTable(): void {
-  const banlistTable = document.getElementById('banlist-body')
+  const banlistTable = document.getElementById('banlist')
   if (banlistTable) {
     banlistTable.innerHTML = ''
   }
 }
 
 async function createDbEntry(entry): Promise<void> {
-  const banlistTable = document.getElementById('banlist-body')
+  const banlistTable = document.getElementById('banlist')
 
   if (banlistTable) {
-    const tr = document.createElement('tr')
-    tr.classList.add('p-x', 'p-y')
-    const tdButton = document.createElement('td')
+    const card = document.createElement('div')
+    card.classList.add('card', 'text-bg-dark', 'my-1', 'bg-dark-soft')
+    const cardBody = document.createElement('div')
     const deleteBtn = document.createElement('button')
-    tdButton.classList.add('text-right')
+    cardBody.classList.add('card-body')
     deleteBtn.classList.add('btn', 'delete')
     deleteBtn.addEventListener('click', async (e: Event | any) => {
       e.preventDefault()
@@ -40,20 +39,34 @@ async function createDbEntry(entry): Promise<void> {
         console.error(error)
       }
     })
+
     Object.entries(entry).forEach(([key, value]) => {
-      const td = document.createElement('td')
-      td.innerHTML = value as string
-      td.id = key + 'Td'
-      if (key === 'description') {
-        td.classList.add('text-goldenrod')
-        td.style.width = '100%'
+      if (key === 'name') {
+        const div = document.createElement('div')
+        div.classList.add('d-flex', 'justify-content-between', 'calibri')
+        div.innerHTML = value as string
+        div.id = key + 'Td'
+        div.appendChild(deleteBtn)
+
+        cardBody.appendChild(div)
+      } else {
+        if (key !== 'id') {
+          const div = document.createElement('div')
+          div.classList.add('calibri')
+          div.innerHTML = value as string
+          div.id = key + 'Td'
+          if (key === 'description') {
+            div.classList.add('text-goldenrod')
+          }
+          if (key === 'date') {
+            div.classList.add('badge', 'text-bg-secondary', 'bade-sm')
+          }
+          deleteBtn.id = entry.id
+          cardBody.appendChild(div)
+        }
       }
-      td.style.width = 'auto !important'
-      td.style.minWidth = '175px'
-      deleteBtn.id = entry.id
-      tr.appendChild(td)
     })
-    tr.addEventListener('click', async (e: any) => {
+    card.addEventListener('click', async (e: any) => {
       e.preventDefault()
       e.stopImmediatePropagation()
       // e.stopPropagation()
@@ -86,26 +99,17 @@ async function createDbEntry(entry): Promise<void> {
         }
       }
     })
-    tdButton.appendChild(deleteBtn)
-    tr.appendChild(tdButton)
-    banlistTable.appendChild(tr)
+    card.appendChild(cardBody)
+    banlistTable.appendChild(card)
   }
 }
 
 function init(): void {
   window.addEventListener('DOMContentLoaded', () => {
     const versions = window.electron.process.versions
-    const appVersion = window.electron.process.env.npm_package_version
     console.log('.electron-version', `Electron v${versions.electron}`)
     console.log('.chrome-version', `Chromium v${versions.chrome}`)
     console.log('.node-version', `Node v${versions.node}`)
-    console.log('.app-version', appVersion)
-    const versionElement = document.getElementById('appVersion')
-    if (versionElement) {
-      versionElement.style.fontSize = '0.8rem'
-      versionElement.innerText = `v${appVersion}`
-    }
-
     initDb()
 
     const ban = document.getElementById('ban')
@@ -115,13 +119,13 @@ function init(): void {
       DB_ENTRIES = [...dbEntries]
       const name = document.getElementById('name') as HTMLTextAreaElement
       const reason = document.getElementById('reason') as HTMLTextAreaElement
-      const date = new Date().toDateString()
+      const date = new Date().toJSON().split('T')[0]
       if (DB) {
         const entry = {
           id: dbEntries!.length,
           name: name?.value,
-          description: reason?.value,
-          date: date
+          date: date,
+          description: reason?.value
         }
         await DB.add(entry)
         DB_ENTRIES.push({ entry })

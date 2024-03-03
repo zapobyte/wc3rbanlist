@@ -2,7 +2,7 @@
 
 Welcome to the **W3RBanlist** project repository!
 
-![Warcraft 3 Reforge Banlist]![image](https://github.com/zapobyte/wc3rbanlist/assets/12383059/6d9e30c3-ccd2-49cd-a2fb-1352504c15f3)
+![Warcraft 3 Reforge Banlist]
 
 
 ## Overview
