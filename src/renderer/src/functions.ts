@@ -147,7 +147,7 @@ export function initBanFunction(db:DataBase){
       const date = new Date().toJSON().split('T')[0]
       if (db) {
         const entry = {
-          id: dbEntries!.length,
+          id: dbEntries!.length + 1,
           name: name?.value,
           date: date,
           reason: reason?.value

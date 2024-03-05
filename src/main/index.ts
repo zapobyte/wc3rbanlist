@@ -15,7 +15,7 @@ function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 480,
-    height: 560,
+    height: 640,
     center: true,
     autoHideMenuBar: import.meta.env.MODE === 'development' ? false : true,
     icon: icon,

@@ -36,7 +36,7 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - [x] **Delete entire Banlist**: Users can delete entries from the banlist database.
 - [x] **Delete Entry from Banlist**: Users can delete entries from the banlist database.
 - [x] **Search Functionality**: Added search functionality to easily find specific entries in the banlist.
-- [x] **Copy to clipboard**: Copy banlsit entry message to clipboard
+- [x] **Copy to clipboard**: Copy banlsit entry message to clipboard. Click on a ban card to copy that ban message to your clipboard.
 - [x] **Replay Upload**: Provide functionality for users to upload replays as proof of bans.
 - [x] **Replay Analyzer**: Automatically analyze replays to detect bans and reasons. 
 

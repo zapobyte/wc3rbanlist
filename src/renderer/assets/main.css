@@ -106,7 +106,7 @@ header {
   border: 3px solid transparent;
   border-image: url('../../../resources/orcborder.png') 10 round;
   user-select: none;
-  max-height: calc(100vh - 110px);
+  max-height: calc(80vh - 110px);
   background-color: rgba(8, 8, 8, 0.8);
   overflow-y: auto;
   line-height: 1.4;
