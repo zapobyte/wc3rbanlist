@@ -13,11 +13,13 @@ asarUnpack:
   - resources/**
 win:
   executableName: w3rbanlist
+  icon: build/icon.ico   # Path to the icon for the built app
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
+  installerIcon: build/icon.ico  # Path to the icon for the installer
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:

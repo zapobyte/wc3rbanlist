@@ -25,9 +25,11 @@
     "@electron-toolkit/utils": "^3.0.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
+    "electron-screenshot": "^1.0.5",
     "electron-updater": "^6.1.7",
     "idb": "^8.0.0",
-    "material-icons": "^1.13.12"
+    "tesseract.js": "^5.0.5",
+    "w3gjs": "^2.5.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",

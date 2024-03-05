@@ -49,12 +49,7 @@ export default class DataBase {
   async remove(id: number): Promise<void> {
     const db = await this.dbPromise
     try {
-      const deletionResult = await db.delete('data', id)
-      if (deletionResult === undefined) {
-        console.log('No entry found with the provided ID.')
-      } else {
-        console.log('Entry deleted successfully.')
-      }
+      await db.delete('data', id)
     } catch (error) {
       if (error instanceof DOMException) {
         // Handle specific DOMException errors here (e.g., NotFoundError)

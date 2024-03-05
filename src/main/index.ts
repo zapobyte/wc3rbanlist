@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   app,
   shell,
-  BrowserWindow
-  // ipcMain
+  BrowserWindow,
+  ipcMain
+  // globalShortcut
 } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/items-icon.png?asset'
+import icon from '../../resources/icon.ico?asset'
+// import W3GReplay from 'w3gjs'
+
+let DATA = [] as object[]
 
 function createWindow(): void {
   // Create the browser window.
@@ -55,12 +60,46 @@ app.whenReady().then(() => {
   })
 
   // IPC test
-  // ipcMain.on('ping', (...data) => {
-  //   console.log('pong')
-  // })
+  ipcMain.on('db-data', (event, data) => {
+    console.log('trigger', event)
+    DATA = DATA.filter((x: any) => x.id !== data.id)
+    data.forEach((x: { name: string }) => {
+      DATA.push(x)
+    })
+  })
 
   createWindow()
+  // globalShortcut.register('Ctrl+P', async () => {
+  //   const parser = new W3GReplay()
+  //   const result = await parser.parse('replay.w3g')
+  //   console.log(result)
 
+  // desktopCapturer
+  // .getSources({
+  //   types: ['screen'],
+  //   thumbnailSize: {
+  //     height: 4000,
+  //     width: 4000
+  //   }
+  // })
+  // .then(async (sources) => {
+  //   const img = sources[0].thumbnail
+  //   const worker = await createWorker('eng')
+  //   const imageCreated = img.toPNG()
+  //   const ret = await worker.recognize(imageCreated)
+  //   DATA.forEach((entry: any) => {
+  //     console.log(ret.data.text.toLowerCase())
+  //     console.log(entry)
+  //     if (ret.data.text.toLowerCase().includes(entry.name.toLowerCase())) {
+  //       const text = `BAN:[${entry.date}]::${entry.name} - REASON - ${entry.description}`
+  //       clipboard.writeText(text)
+  //     }
+  //   })
+  //   await worker.terminate()
+  //   // clipboard.writeImage(img)
+  //   // The image to display the screenshot
+  // })
+  // })
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
