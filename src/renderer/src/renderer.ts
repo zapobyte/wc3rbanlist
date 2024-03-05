@@ -6,6 +6,7 @@ import {
   createDbEntry,
   initBanFunction,
   initDeleteBanlistFunction,
+  initReplayUploadFunction,
   initSearchFunction
 } from './functions'
 
@@ -24,10 +25,10 @@ function init(): void {
     dbEntries?.forEach((entry) => {
       createDbEntry(entry, db)
     })
-    window.electron.ipcRenderer.send('db-data', dbEntries)
     initBanFunction(db)
     initDeleteBanlistFunction(db)
     initSearchFunction(db)
+    initReplayUploadFunction(db)
   })
 }
 

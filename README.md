@@ -37,6 +37,8 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - [x] **Delete Entry from Banlist**: Users can delete entries from the banlist database.
 - [x] **Search Functionality**: Added search functionality to easily find specific entries in the banlist.
 - [x] **Copy to clipboard**: Copy banlsit entry message to clipboard
+- [x] **Replay Upload**: Provide functionality for users to upload replays as proof of bans.
+- [x] **Replay Analyzer**: Automatically analyze replays to detect bans and reasons. 
 
 ### Features Not Done (Planned)
 - [ ] **Authentication** - Add the ability to login and have an account 
@@ -47,14 +49,11 @@ It serves as a banlist manager for players banned from custom games in Warcraft 
 - [ ] **Sync Banlist to Cloud**: Enable synchronization of banlists to the cloud for easy access.
 - [ ] **Share Banlist with All Users in Cloud**: Allow users to share their banlists with others in the cloud.
 - [ ] **Import Banlist from Players**: Implement functionality to import banlists from other players into the user's banlist database.
-- [ ] **Replay Upload**: Provide functionality for users to upload replays as proof of bans.
-- [ ] **Replay Analyzer**: Automatically analyze replays to detect bans and reasons.
+- [ ] **Replay Analyzer Improvements**: Improve the replay analyzer to create more data
 - [ ] **Appeal Unban**: Implement a system for users to appeal bans for review.
 - [ ] **Create One Large Database Banlist**: Create a comprehensive banlist database for all users.
 
 ### Future Features
-
-- [ ] **Replay Analyzer**: Analyze game replays to automatically detect bans and reasons.
 - [ ] **Global Banlist**: Create a global banlist database accessible to all users.
 - [ ] **Community Features**: Introduce community-driven features such as forums or discussion boards.
 - [ ] **Improved UI/UX**: Enhance user interface and user experience based on community feedback.

@@ -11,6 +11,43 @@ export function clearTable(): void {
   }
 }
 
+export function initReplayUploadFunction(db){
+  const fileInput = document.getElementById('replay');
+  if(fileInput){
+    fileInput.addEventListener("cancel", () => {
+      console.log("Cancelled.");
+    });
+    fileInput.addEventListener("change", (event:any) => {
+      const file = event.target.files[0];
+      window.electron.ipcRenderer.send('parse-replay',file.path);
+    })
+  }
+  //@ts-ignore
+  window.electron.ipcRenderer.on('replay-parsed', async (event, parsedData) => {
+    const dbEntries = await db?.getAllEntries() as []
+    const message = confirm(`Found ${parsedData.bans.length} possible bans. Do you want to ban them?`);
+    if(message){
+      parsedData.bans.forEach(async (ban, i)=>{  
+        const date = new Date().toDateString();
+        const entry = {
+          id: dbEntries!.length + i +1,
+          name: ban,
+          date: date,
+          reason: 'Leaver[AUTOBAN]'
+        }
+        await db.add(entry)
+        createDbEntry(entry, db)
+      })
+    }
+    if (parsedData.error) {
+      console.error(parsedData.error);
+      return;
+    }
+    
+    // Do something with parsedData
+  });
+}
+
 export async function createDbEntry(entry, DB): Promise<void> {
   const banlistTable = document.getElementById('banlist')
   if (banlistTable) {
@@ -39,46 +76,36 @@ export async function createDbEntry(entry, DB): Promise<void> {
     })
 
     Object.entries(entry).forEach(([key, value]) => {
+
       if (key === 'name') {
-        const img = document.createElement('img')
-        img.width = 32
-        img.height = 32
-        img.src = TIME_IMG
         const div = document.createElement('div')
         const span = document.createElement('span')
         div.classList.add('d-flex', 'calibri')
-        img.classList.add('rounded')
         span.innerText = value as string
         div.id = key + 'Td'
-        img.style.marginRight = '5px'
-        div.appendChild(img)
         div.appendChild(span)
         div.appendChild(deleteBtn)
-
         cardBody.appendChild(div)
-      } else {
-        if (key !== 'id') {
-          const div = document.createElement('div')
-          div.classList.add('calibri')
-          div.innerHTML = value as string
-          div.id = key + 'Td'
-          if (key === 'description') {
-            div.classList.add('text-goldenrod', 'w-100')
-          }
-          if (key === 'date') {
-            div.classList.add('badge', 'text-bg-secondary', 'bade-sm', 'my-2')
-          }
-          deleteBtn.id = entry.id
-          cardBody.appendChild(div)
-        }
       }
+      if (key !== 'id' && key !== 'name') {
+        const div = document.createElement('div')
+        div.classList.add('calibri')
+        div.innerHTML = value as string
+        div.id = key + 'Td'
+        if (key === 'reason') {
+          div.classList.add('text-goldenrod', 'w-100')
+        }
+        deleteBtn.id = entry.id
+        cardBody.appendChild(div)
+      }
+    
     })
 
     card.addEventListener('click', async (e: any) => {
       e.preventDefault()
       const tooltip = document.getElementById('tooltip')
       if (tooltip) {
-        const text = `BAN:[${entry.date}]::${entry.name} - REASON - ${entry.description}`
+        const text = `BAN:[${entry.date}]::${entry.name} - REASON - ${entry.reason}`
         if (e.target && e.target.parentElement && e.target.id !== '') {
           const copyText = `Message copy`
           tooltip.innerText = copyText
@@ -123,7 +150,7 @@ export function initBanFunction(db:DataBase){
           id: dbEntries!.length,
           name: name?.value,
           date: date,
-          description: reason?.value
+          reason: reason?.value
         }
         await db.add(entry)
         createDbEntry(entry, db)
@@ -159,7 +186,7 @@ export function initSearchFunction(db:DataBase){
           if (
             (formatedSearch !== '' &&
               x.name.toLowerCase().includes(formatedSearch.toLowerCase())) ||
-            x.description.toLowerCase().includes(formatedSearch.toLowerCase())
+            x.reason.toLowerCase().includes(formatedSearch.toLowerCase())
           ) {
             filterEntries.push(x)
           }

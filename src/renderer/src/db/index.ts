@@ -4,7 +4,7 @@ interface DataEntry {
   id: number
   name: string
   date: string
-  description: string
+  reason: string
 }
 
 interface MyDB extends DBSchema {
