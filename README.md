@@ -79,13 +79,10 @@ To install and run the **Warcraft 3 Reforge Banlist** software, follow these ste
 
 Contributions to the **Warcraft 3 Reforge Banlist** project are welcome! Feel free to fork the repository, make your changes, and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For questions or inquiries about the **Warcraft 3 Reforge Banlist** project, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or inquiries about the **Warcraft 3 Reforge Banlist** project, please contact [vrzaporojan@gmail.com](mailto:vrzaporojan@gmail.com).
 
 **Note: The scope of this project is not to create a database for custom games, but rather a database of players banned from custom games.**
 
