@@ -1,6 +1,6 @@
 {
   "name": "w3rbanlist",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A renew Warcraft 3 Reforge Banlist",
   "main": "./out/main/index.js",
   "author": "zapobyte",
